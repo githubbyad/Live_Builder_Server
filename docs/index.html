@@ -1,0 +1,606 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://bulletlink.com/JQuery/jquery.js"></script>
+    <title>Live Builder - Issues / Requests</title>
+    <script>
+        $(document).ready(function() {
+            var MyDate = new Date();
+            var datex;
+            var monthx;
+
+            MyDate.setDate(MyDate.getDate());
+
+            datex = ('0' + MyDate.getDate()).slice(-2);
+            monthx = ('0' + (MyDate.getMonth() + 1)).slice(-2);
+
+            $('.date').text(datex);
+            $('.month').text(monthx);
+            var d = parseInt($('.date').text());
+            var d1 = d
+            var d2 = d1 - 1;
+            var d3 = d1 - 2;
+            $('.tdd').each(function() {
+                if ($(this).attr('data-month') == $('.month').text()) {
+                    if ($(this).text() == d1 || $(this).text() == d2 || $(this).text() == d3) {
+                        $(this).parent('tr').addClass('latest');
+                    }
+                    if ($(this).text() == d1) {
+                        $(this).parent('tr').addClass('o1');
+                    }
+                    if ($(this).text() == d2) {
+                        $(this).parent('tr').addClass('o2');
+                    }
+                    if ($(this).text() == d3) {
+                        $(this).parent('tr').addClass('o3');
+                    }
+                }
+                /*if ($(this).attr('data-month') == "2") {
+                    if ($(this).text() == d1 || $(this).text() == d2 || $(this).text() == d3) {
+                        $(this).parent('tr').addClass('latest');
+                    }
+                    if ($(this).text() == d1) {
+                        $(this).parent('tr').addClass('o1');
+                    }
+                    if ($(this).text() == d2) {
+                        $(this).parent('tr').addClass('o2');
+                    }
+                    if ($(this).text() == d3) {
+                        $(this).parent('tr').addClass('o3');
+                    }
+                }*/
+            });
+            $('td:nth-child(3)').each(function() {
+                if ($(this).text() == '') {
+                    $(this).parent('tr').addClass('od9');
+                }
+            });
+            $('.v').each(function() {
+                $(this).parent('tr').addClass('od10');
+            });
+            $('.v3').each(function() {
+                $(this).parent('tr').addClass('od9');
+            });
+            $('.s').each(function() {
+                $(this).parent('tr').addClass('od8');
+            });
+        });
+    </script>
+    <style>
+        .body {
+            width: 100%;
+            float: left;
+            margin: 0;
+            padding: 0;
+            font-family: Trebuchet MS;
+        }
+        
+        pre {
+            float: left;
+            width: 100%;
+        }
+        
+        .staff {
+            float: left;
+            width: 100%;
+            margin-bottom: 0;
+        }
+        
+        done {
+            color: green;
+            font-weight: bold;
+        }
+        
+        pre {
+            font-family: Trebuchet MS;
+        }
+        
+        .wrap {
+            width: 90%;
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h1 {
+            font-weight: bold;
+            color: #4747d2;
+            background-image: linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
+            background-position: left top, right bottom, left bottom, right top;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            background-image: linear-gradient(90deg, #000 50%, transparent 50%), linear-gradient(90deg, #000 50%, transparent 50%), linear-gradient(0deg, #000 50%, transparent 50%), linear-gradient(0deg, #000 50%, transparent 50%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
+            background-position: left top, right bottom, left bottom, right top;
+            animation: hpe-border 400ms infinite linear;
+        }
+        
+        @keyframes hpe-border {
+            0% {
+                background-position: left top, right bottom, left bottom, right top;
+            }
+            100% {
+                background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
+            }
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+        
+        .head {
+            background: #6774da;
+            color: white;
+        }
+        
+        td:nth-child(1) {
+            width: 25px;
+            text-align: center;
+        }
+        
+        td:nth-child(3) {
+            width: 110px;
+        }
+        
+        table td {
+            border: 1px solid #90caf9;
+            padding: 10px;
+            margin: 0;
+        }
+        
+        .f {
+            background: #5ad25a;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .p {
+            background: #d24f4f;
+            color: white;
+            text-align: center;
+        }
+        
+        .v {
+            background: #ffff69;
+            color: black;
+            text-align: center;
+        }
+        
+        .v3 {
+            background: gray;
+            color: black;
+            text-align: center;
+        }
+        
+        .body {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        td i {
+            font-style: normal;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            opacity: 0.5;
+            background-image: linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 1px, 15px 1px, 1px 15px, 1px 15px;
+            background-position: left top, right bottom, left bottom, right top;
+            animation: hpe-border2 800ms infinite linear;
+            border-radius: 5px;
+        }
+        
+        @keyframes hpe-border2 {
+            0% {
+                background-position: left top, right bottom, left bottom, right top;
+            }
+            100% {
+                background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
+            }
+        }
+        
+        .head td {
+            text-align: center !important;
+        }
+        
+        td span {
+            color: red;
+            font-size: 30px;
+        }
+        
+        tr {
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        tr td:nth-child(4) {
+            box-shadow: 0 0 0 1px black inset !important;
+        }
+        
+        .head td:nth-child(4) {
+            box-shadow: none !important;
+        }
+        
+        .cw:hover {
+            animation: cws 3s infinite;
+            opacity: 1;
+            background: highlight;
+            transition: 200ms linear;
+        }
+        
+        .latest td:nth-child(1)::before {
+            content: "*";
+            color: red;
+            font-size: 35px;
+            animation: ddd 2s infinite;
+        }
+        
+        @keyframes ddd {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        h3 {
+            float: right;
+            color: highlight;
+        }
+        
+        .tdd[data-month="11"]::after {
+            content: " Nov";
+        }
+        
+        .tdd[data-month="12"]::after {
+            content: " Dec";
+        }
+        
+        .tdd[data-month="01"]::after {
+            content: " Jan";
+        }
+        
+        .tdd[data-month="02"]::after {
+            content: " Feb";
+        }
+        
+        .tdd[data-month="03"]::after {
+            content: " Mar";
+        }
+        
+        tbody {
+            display: flex;
+            width: 100%;
+            /*! justify-content: center; */
+            /*! align-items: center; */
+            /*! float: left; */
+            flex-flow: wrap;
+            /*! flex-wrap: wrap; */
+            flex-direction: column;
+        }
+        
+        tr td:nth-child(1) {
+            width: 30px;
+        }
+        
+        tr td:nth-child(2) {
+            width: 500px;
+        }
+        
+        tr td:nth-child(4) {
+            width: 100px;
+        }
+        
+        tr td:nth-child(5) {
+            width: 300px;
+        }
+        
+        tr td:nth-child(3) {
+            width: 80px;
+        }
+        
+        tr {
+            width: 100%;
+            order: 4;
+        }
+        
+        .wrap {
+            width: 1116px;
+        }
+        
+        .latest.o2 {
+            order: 2;
+        }
+        
+        .head {
+            order: 0;
+        }
+        
+        .latest.o3 {
+            order: 3;
+        }
+        
+        .latest.o1 {
+            order: 1;
+        }
+        
+        .od9 {
+            order: 9;
+        }
+        
+        .od8 {
+            order: 8;
+        }
+        
+        .od10 {
+            order: 10;
+        }
+        
+        red {
+            color: red;
+        }
+        
+        green {
+            color: green;
+        }
+        
+        .doc {
+            width: 100%;
+            float: left;
+            text-align: right;
+        }
+        
+        .doc a {
+            text-decoration: navajowhite;
+            color: white;
+            display: inline-block;
+            background: #4caf50;
+            padding: 0 50px;
+            line-height: 40px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="body">
+    <div class="wrap">
+        <h1>Live Builder(Server) - <span>Issues/Requests</span></h1>
+        <!-- <div class="doc">
+            <a href="https://githubbyad.github.io/Live-Builder/" target="_blank">Editor Mode - Documentation</a>
+            <a href="https://githubbyad.github.io/Live-Builder/styles.html" target="_blank" style="background-color: #800080;">Style Mode Documentation</a>
+        </div> -->
+        <table cellspacing="0">
+            <tr class="head">
+                <td>No.</td>
+                <td>Issue/Request</td>
+                <td>Updated</td>
+                <td>Status</td>
+                <td>Comment (by Adnan)</td>
+
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Logout link is going to "/error.asp" page.</td>
+                <td class="tdd" data-month="04">19</td>
+                <td class="p">PENDING</td>
+                <td>It should go to login page or on homepage</td>
+
+            </tr>
+
+        </table>
+    </div>
+    <span class="date" style="display:none"></span><br>
+    <span class="month" style="display:none"></span>
+
+
+    <br><br><br><br><br><br><br><br><br>
+    <style>
+        #Feedback2 {
+            display: none;
+            width: 90%;
+            margin-top: 50px;
+            padding-top: 50px;
+            float: left;
+            padding-left: 5%;
+            padding-right: 5%;
+            background: #f3f3f3;
+            border-radius: 30px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .r2 {
+            font-size: 50px;
+            text-align: center;
+            background: #333;
+            color: white;
+            border-radius: 50px;
+            line-height: 100px;
+            text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .staff_table {
+            width: 100%;
+            float: left;
+        }
+        
+        .staff {
+            font-weight: bold;
+            color: red;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        
+        .staff {
+            font-weight: bold;
+            color: red;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+        
+        .nx {
+            background: gray;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+        }
+        
+        .staff_table tr td:nth-child(4) {
+            width: 384px;
+            box-shadow: none !important;
+        }
+        
+        .staff_table tr td:nth-child(2) {
+            width: 580px;
+        }
+        
+        .staff_table tr td:nth-child(3) {
+            width: 100px;
+        }
+        
+        .staff_table td {
+            border-color: black;
+        }
+        
+        .staff_table tr td:nth-child(3) {
+            box-shadow: 0 0 0 0px red inset !important;
+        }
+        
+        .head.staff_head td:nth-child(3) {
+            box-shadow: none !important;
+        }
+        
+        .head.staff_head {
+            background: black;
+        }
+        
+        .head.staff_head td {
+            border-color: white !important;
+            border-bottom-color: black !important;
+        }
+        
+        .staff_table tr td:nth-child(2),
+        .staff_table tr td:nth-child(4) {
+            white-space: pre-wrap;
+        }
+        
+        .fx {
+            background: green;
+            color: white;
+            text-align: center;
+        }
+        
+        .px {
+            background: red;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .vx {
+            background: yellow;
+            font-weight: bold;
+            text-align: center;
+            color: black;
+        }
+        
+        .none {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .staff h3 {
+            background: #1ed032;
+            color: white;
+            text-align: left !important;
+            float: left !important;
+            margin: 0;
+            padding: 0 30px;
+        }
+        
+        .staff h3:after {
+            content: "";
+            position: absolute;
+            border-top: 10px solid transparent;
+            margin-left: 30px;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid #1ed032;
+            border-width: 20px !important;
+        }
+        
+        .staff_table {
+            margin-bottom: 100px;
+        }
+        
+        .staff.usman h3 {
+            background-color: #737319;
+        }
+        
+        .staff.usman h3:after {
+            border-left-color: #737319;
+        }
+        
+        .none {
+            background: #3020ee;
+            color: white;
+        }
+        
+        .staff.zaid h3 {
+            background-color: #1622ca;
+        }
+        
+        .staff.zaid h3:after {
+            border-left-color: #1622ca;
+        }
+        
+        .staff.imran h3 {
+            background-color: #ca16a5;
+        }
+        
+        .staff.imran h3:after {
+            border-left-color: #ca16a5;
+        }
+        
+        .staff.owais h3 {
+            background-color: purple;
+        }
+        
+        .staff.owais h3:after {
+            border-left-color: purple;
+        }
+        
+        .staff.noman h3 {
+            background-color: brown;
+        }
+        
+        .staff.noman h3:after {
+            border-left-color: brown;
+        }
+        
+        .staff_table tbody {
+            display: block;
+        }
+        
+        .staff_table tr:hover td {
+            box-shadow: 0px 0px 0 2px inset #0004f7 !important;
+        }
+        
+        .staff_table:hover tr:hover {
+            opacity: 1 !important;
+        }
+    </style>
+</body>
+
+</html>
