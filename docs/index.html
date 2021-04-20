@@ -41,14 +41,14 @@
             });
             $('td:nth-child(3)').each(function() {
                 if ($(this).text() == '') {
-                    $(this).parent('tr').addClass('od9');
+                    $(this).parent('tr').addClass('od10');
                 }
             });
             $('.v').each(function() {
-                $(this).parent('tr').addClass('od10');
+                $(this).parent('tr').addClass('od11');
             });
             $('.v3').each(function() {
-                $(this).parent('tr').addClass('od9');
+                $(this).parent('tr').addClass('od10');
             });
             $('.p').each(function() {
                 $(this).parent('tr').addClass('od8');
@@ -394,16 +394,20 @@
             order: 1;
         }
         
-        .latest.od9 {
-            order: 9;
+        .latest.od10 {
+            order: 10;
         }
         
-        .latest.od8 {
+        .latest.o1.od8 {
             order: 8;
         }
         
-        .latest.od10 {
-            order: 10;
+        .latest.o2.od8 {
+            order: 9;
+        }
+        
+        .latest.od11 {
+            order: 11;
         }
         
         red {
@@ -730,7 +734,7 @@
             <tr>
                 <td>12</td>
                 <td>
-                    <stf-zaid>Zaid</stf-zaid>We need to change page not found the error. For example, if some one visite the deleted article link error need to say the article you are trying to view is deleted or removed by a admin.
+                    <stf-zaid>Zaid</stf-zaid>We need to change page not found error. For example, if some one visit the deleted article link, error need to say the "Article you are trying to view is deleted or removed by a admin".
                 </td>
 
                 <td class="tdd" data-month="04">20</td>
