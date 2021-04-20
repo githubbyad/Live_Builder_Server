@@ -5,7 +5,7 @@
     <title>Live Builder(Server) - Issues / Requests</title>
     <script>
         function updatedTime() {
-            document.write('<span class="mtime">' + document.lastModified.split('2021 ').pop() + '</span>, <span class="mdate">' + document.lastModified.split('/2021').shift().split('/').pop() + '</span><span class="mmonth" data-month-m="' + document.lastModified.split('/2021').shift().split('/').shift() + '"></span><span>, ' + document.lastModified.split('/').pop().split(' ').shift() + '</span>');
+            document.write('<span class="mtime">' + document.lastModified.split('2021 ').pop().split(':')[0] + ':' + document.lastModified.split('2021 ').pop().split(':')[1] + '</span>, <span class="mdate">' + document.lastModified.split('/2021').shift().split('/').pop() + '</span><span class="mmonth" data-month-m="' + document.lastModified.split('/2021').shift().split('/').shift() + '"></span><span>, ' + document.lastModified.split('/').pop().split(' ').shift() + '</span>');
         }
         $(document).ready(function() {
             var MyDate = new Date();
