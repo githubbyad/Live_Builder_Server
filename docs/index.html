@@ -503,7 +503,12 @@
         <div class="luo">(Last Updated on
             <lut>
                 <script>
-                    document.lastModified;
+                    function updatedTime() {
+                        document.write(document.lastModified);
+                    }
+                </script>
+                <script>
+                    updatedTime();
                 </script>
             </lut>)</div>
         <table cellspacing="0">
