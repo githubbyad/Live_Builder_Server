@@ -41,14 +41,14 @@
             });
             $('td:nth-child(3)').each(function() {
                 if ($(this).text() == '') {
-                    $(this).parent('tr').addClass('od10');
+                    $(this).parent('tr').addClass('od11');
                 }
             });
             $('.v').each(function() {
-                $(this).parent('tr').addClass('od11');
+                $(this).parent('tr').addClass('od12');
             });
             $('.v3').each(function() {
-                $(this).parent('tr').addClass('od10');
+                $(this).parent('tr').addClass('od11');
             });
             $('.p').each(function() {
                 $(this).parent('tr').addClass('od8');
@@ -394,16 +394,16 @@
             order: 1;
         }
         
-        .latest.od10 {
-            order: 10;
-        }
-        
         .latest.o1.od8 {
             order: 8;
         }
         
         .latest.o2.od8 {
             order: 9;
+        }
+        
+        .latest.o3.od8 {
+            order: 10;
         }
         
         .latest.od11 {
