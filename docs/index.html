@@ -1,320 +1,917 @@
 <html>
 
 <head>
-    <title>Server Migration Steps</title>
+    <script type="text/javascript" src="https://bulletlink.com/JQuery/jquery.js"></script>
+    <title>Live Builder(Server) - Issues / Requests</title>
+    <script>
+        function updatedTime() {
+            document.write('<span class="mtime">' + document.lastModified.split('2021 ').pop().split(':')[0] + ':' + document.lastModified.split('2021 ').pop().split(':')[1] + '</span>, <span class="mdate">' + document.lastModified.split('/2021').shift().split('/').pop() + '</span><span class="mmonth" data-month-m="' + document.lastModified.split('/2021').shift().split('/').shift() + '"></span><span>, ' + document.lastModified.split('/').pop().split(' ').shift() + '</span>');
+        }
+        $(document).ready(function() {
+            var MyDate = new Date();
+            var datex;
+            var monthx;
+
+            MyDate.setDate(MyDate.getDate());
+
+            datex = ('0' + MyDate.getDate()).slice(-2);
+            monthx = ('0' + (MyDate.getMonth() + 1)).slice(-2);
+
+            $('.date').text(datex);
+            $('.month').text(monthx);
+            var d = parseInt($('.date').text());
+            var d1 = d
+            var d2 = d1 - 1;
+            var d3 = d1 - 2;
+            $('.tdd').each(function() {
+                if ($(this).attr('data-month') == $('.month').text()) {
+                    if ($(this).text() == d1 || $(this).text() == d2 || $(this).text() == d3) {
+                        $(this).parent('tr').addClass('latest');
+                    }
+                    if ($(this).text() == d1) {
+                        $(this).parent('tr').addClass('o1');
+                    }
+                    if ($(this).text() == d2) {
+                        $(this).parent('tr').addClass('o2');
+                    }
+                    if ($(this).text() == d3) {
+                        $(this).parent('tr').addClass('o3');
+                    }
+                }
+            });
+            $('td:nth-child(3)').each(function() {
+                if ($(this).text() == '') {
+                    $(this).parent('tr').addClass('od11');
+                }
+            });
+            $('.v').each(function() {
+                $(this).parent('tr').addClass('od12');
+            });
+            $('.v3').each(function() {
+                $(this).parent('tr').addClass('od11');
+            });
+            $('.p').each(function() {
+                $(this).parent('tr').addClass('od8');
+            });
+        });
+    </script>
     <style>
-        li {
+        .body {
+            width: 100%;
+            float: left;
+            margin: 0;
+            padding: 0;
+            font-family: Trebuchet MS;
+        }
+        
+        .mmonth[data-month-m="01"]:after {
+            content: " Jan";
+        }
+        
+        .mmonth[data-month-m="02"]:after {
+            content: " Feb";
+        }
+        
+        .mmonth[data-month-m="03"]:after {
+            content: " Mar";
+        }
+        
+        .mmonth[data-month-m="04"]:after {
+            content: " Apr";
+        }
+        
+        .mmonth[data-month-m="05"]:after {
+            content: " May";
+        }
+        
+        .mmonth[data-month-m="06"]:after {
+            content: " Jun";
+        }
+        
+        .mmonth[data-month-m="07"]:after {
+            content: " Jul";
+        }
+        
+        .mmonth[data-month-m="08"]:after {
+            content: " Aug";
+        }
+        
+        .mmonth[data-month-m="09"]:after {
+            content: " Sep";
+        }
+        
+        .mmonth[data-month-m="10"]:after {
+            content: " Oct";
+        }
+        
+        .mmonth[data-month-m="11"]:after {
+            content: " Nov";
+        }
+        
+        .mmonth[data-month-m="12"]:after {
+            content: " Dec";
+        }
+        
+        pre {
             float: left;
             width: 100%;
-            margin-bottom: 40px;
-            color: #4caf50;
-            box-sizing: border-box;
         }
         
-        .wrap_innner2 {
-            background-color: white;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23c9d1cb' fill-opacity='0.16'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
-            background-attachment: fixed;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
+        .staff {
             float: left;
             width: 100%;
-            margin-top: 20px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            margin-bottom: 100px;
+            margin-bottom: 0;
         }
         
-        li {
-            font-size: 25px;
-            line-height: 30px;
-            border-left: 5px solid #4caf50;
-            padding-left: 10px;
-            padding-bottom: 20px;
-            padding-top: 20px;
+        done {
+            color: green;
+            font-weight: bold;
         }
         
-        li {
-            background: white;
-            box-shadow: 0px 0px 5px #4caf50;
-            transition: 300ms linear;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
+        pre {
+            font-family: Trebuchet MS;
         }
         
         .wrap {
-            width: 100%;
-            float: left;
-        }
-        
-        .wrap_innner {
-            width: 1200px;
+            width: 90%;
+            float: none;
             margin-left: auto;
             margin-right: auto;
         }
         
-        textarea {
-            float: left;
-            clear: both;
-            width: 1000px;
+        h1 {
+            font-weight: bold;
+            color: #4747d2;
+            background-image: linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(90deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%), linear-gradient(0deg, violet 10%, indigo 20%, blue 30%, green 50%, yellow 60%, orange 70%, red 80%, #fff 100%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
+            background-position: left top, right bottom, left bottom, right top;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            background-image: linear-gradient(90deg, #0d1117 50%, transparent 50%), linear-gradient(90deg, #0d1117 50%, transparent 50%), linear-gradient(0deg, #0d1117 50%, transparent 50%), linear-gradient(0deg, #0d1117 50%, transparent 50%);
+            background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+            background-size: 15px 2px, 15px 2px, 2px 15px, 2px 15px;
+            background-position: left top, right bottom, left bottom, right top;
+            animation: hpe-border 400ms infinite linear;
         }
         
-        body {
-            font-family: Trebuchet MS;
+        @keyframes hpe-border {
+            0% {
+                background-position: left top, right bottom, left bottom, right top;
+            }
+            100% {
+                background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
+            }
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+        
+        .head {
+            background: #6774da;
+            color: white;
+        }
+        
+        td:nth-child(1) {
+            width: 25px;
+            text-align: center;
+        }
+        
+        td:nth-child(3) {
+            width: 110px;
+        }
+        
+        table td {
+            border: 1px solid #90caf9;
+            padding: 10px;
+            margin: 0;
+        }
+        
+        .f {
+            background: #5ad25a;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .p {
+            background: #d24f4f;
+            color: white;
+            text-align: center;
+        }
+        
+        .v {
+            background: #ffff69;
+            color: black;
+            text-align: center;
+        }
+        
+        .v3 {
+            background: gray;
+            color: black;
+            text-align: center;
+        }
+        
+        .body {
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        td i {
+            font-style: normal;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            box-shadow: inset 0px 0px 1px 3px rgba(0, 0, 0, 0.5);
+            transition: 300ms linear;
+        }
+        
+        @keyframes hpe-border2 {
+            0% {
+                background-position: left top, right bottom, left bottom, right top;
+            }
+            100% {
+                background-position: left 15px top, right 15px bottom, left bottom 15px, right top 15px;
+            }
+        }
+        
+        .head td {
+            text-align: center !important;
+        }
+        
+        td span {
+            color: red;
+            font-size: 30px;
+        }
+        
+        tr {
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+            transition: 200ms linear;
+        }
+        
+        tr td:nth-child(4) {
+            box-shadow: 0 0 0 1px black inset !important;
+        }
+        
+        .head td:nth-child(4) {
+            box-shadow: none !important;
+        }
+        
+        .cw:hover {
+            animation: cws 3s infinite;
+            opacity: 1;
+            background: highlight;
+            transition: 200ms linear;
+        }
+        
+        .latest td:nth-child(1)::before {
+            content: "*";
+            color: red;
+            font-size: 35px;
+            animation: ddd 2s infinite;
+        }
+        
+        @keyframes ddd {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
         
         h3 {
-            color: #34c434;
-            font-size: 16px;
+            float: right;
+            color: highlight;
         }
         
-        textarea {
-            border-color: #34c434;
-            border-radius: 5px;
-            border-width: 1px;
-            transition: 300ms linear;
-            height: 50px;
+        .tdd[data-month="11"]::after {
+            content: " Nov";
         }
         
-        textarea:hover {
-            height: 150px;
-            transition: 300ms linear;
+        .tdd[data-month="12"]::after {
+            content: " Dec";
         }
         
-        .sticky {
-            position: fixed;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            text-align: center;
+        .tdd[data-month="01"]::after {
+            content: " Jan";
+        }
+        
+        .tdd[data-month="02"]::after {
+            content: " Feb";
+        }
+        
+        .tdd[data-month="03"]::after {
+            content: " Mar";
+        }
+        
+        .tdd[data-month="04"]::after {
+            content: " Apr";
+        }
+        
+        .tdd[data-month="05"]::after {
+            content: " May";
+        }
+        
+        .tdd[data-month="06"]::after {
+            content: " Jun";
+        }
+        
+        .tdd[data-month="07"]::after {
+            content: " Jul";
+        }
+        
+        .tdd[data-month="08"]::after {
+            content: " Aug";
+        }
+        
+        .tdd[data-month="09"]::after {
+            content: " Sep";
+        }
+        
+        .tdd[data-month="10"]::after {
+            content: " Oct";
+        }
+        
+        tbody {
+            display: flex;
             width: 100%;
-            line-height: 30px;
-            color: white;
+            /*! justify-content: center; */
+            /*! align-items: center; */
+            /*! float: left; */
+            flex-flow: wrap;
+            /*! flex-wrap: wrap; */
+            flex-direction: column;
         }
         
-        body {
-            margin: 0;
-            padding: 0;
+        tr td:nth-child(1) {
+            width: 30px;
         }
         
-        dmt {
+        tr td:nth-child(2) {
+            width: 500px;
+        }
+        
+        tr td:nth-child(4) {
+            width: 100px;
+        }
+        
+        tr td:nth-child(5) {
+            width: 300px;
+        }
+        
+        tr td:nth-child(3) {
+            width: 80px;
+        }
+        
+        tr {
             width: 100%;
-            text-align: center;
-            float: left;
-            font-size: 45px;
-            border-bottom: 2px solid;
-            color: #4caf50;
-            float: left;
-            width: 100%;
-            text-align: center;
-            margin-bottom: 10px;
-            font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            order: 4;
         }
         
-        .button {
-            text-decoration: none;
-            background: #4caf50;
-            display: inline-block;
-            color: white;
-            padding: 0 40px;
-            border-radius: 5px;
-            line-height: 35px;
-            font-size: 15px;
+        .wrap {
+            width: 1116px;
         }
         
-        txt {
-            width: 100%;
-            float: left;
+        .od8 {
+            order: 14;
         }
         
-        fd,
-        ff {
+        .latest.o2 {
+            order: 2;
+        }
+        
+        .head {
+            order: 0;
+        }
+        
+        .latest.o3 {
+            order: 3;
+        }
+        
+        .latest.o1 {
+            order: 1;
+        }
+        
+        .latest.o1.od8 {
+            order: 8;
+        }
+        
+        .latest.o2.od8 {
+            order: 9;
+        }
+        
+        .latest.o3.od8 {
+            order: 10;
+        }
+        
+        .latest.od11 {
+            order: 11;
+        }
+        
+        red {
             color: red;
         }
         
-        .sticky a {
-            text-decoration: none !important;
+        green {
+            color: green;
+        }
+        
+        .doc {
+            width: 100%;
+            float: left;
+            text-align: right;
+        }
+        
+        .doc a {
+            text-decoration: navajowhite;
             color: white;
-            font-weight: bold !important;
+            display: inline-block;
+            background: #4caf50;
+            padding: 0 50px;
+            line-height: 40px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            border-radius: 4px;
         }
         
-        .sticky a:hover {
-            color: black;
+        stf-adnan:before,
+        stf-salim:before,
+        stf-zaid:before,
+        stf-juned:before,
+        stf-usman:before,
+        stf-noman:before,
+        stf-owais:before {
+            content: "";
+            width: 5px;
+            height: 80px;
+            background: white;
+            position: absolute;
+            -webkit-transform: skewX(-45deg);
+            transform: skewX(-45deg);
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            left: 0px;
+            top: -20px;
+            animation: _8UqQ8B 1s linear 6ms infinite;
+            opacity: 0.5;
+            z-index: 2;
         }
         
-        .sticky:hover {
-            background: red;
+        @keyframes _8UqQ8B {
+            0% {
+                opacity: 0;
+                left: -15px
+            }
+            50% {
+                opacity: 0.45;
+                left: 45px
+            }
+            to {
+                opacity: 0;
+                left: 100px
+            }
         }
         
-        cd {
-            color: #c444c4;
+        stf-adnan,
+        stf-salim,
+        stf-zaid,
+        stf-juned,
+        stf-usman,
+        stf-noman,
+        stf-owais {
+            float: left;
+            position: relative;
+            padding: 0 10px;
+            color: white;
+            border-radius: 5px;
+            line-height: 20px;
+            margin-right: 5px;
+            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: bold;
+            overflow: hidden;
+            min-width: 45px;
+            text-align: center;
         }
         
-        txt {
-            color: black;
-            font-size: 14px;
+        stf-adnan {
+            background: #00bc22;
+        }
+        
+        stf-salim {
+            background: #0d77e8;
+        }
+        
+        stf-zaid {
+            background: #ea28cb;
+        }
+        
+        stf-juned {
+            background: #28ddea;
+        }
+        
+        stf-usman {
+            background: brown;
+        }
+        
+        stf-noman {
+            background: #6f12cc;
+        }
+        
+        stf-owais {
+            background: #a48409;
+        }
+        
+        tr td:nth-child(2),
+        tr td:nth-child(5) {
+            line-height: 20px;
+        }
+        
+        .luo {
+            float: left;
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-style: italic;
+            font-weight: bold;
+        }
+        
+        lut {
+            color: red
+        }
+        
+        .luspan {
+            background: yellow;
+            padding: 3px 10px;
+            display: inline-block;
+        }
+        
+        stf-adnan~a {
+            color: #00bc22 !important;
+        }
+        
+        stf-salim~a {
+            color: #0d77e8 !important;
+        }
+        
+        stf-zaid~a {
+            color: #ea28cb !important;
+        }
+        
+        stf-juned~a {
+            color: #28ddea !important;
+        }
+        
+        stf-usman~a {
+            color: brown !important;
+        }
+        
+        stf-noman~a {
+            color: #6f12cc !important;
+        }
+        
+        stf-owais~a {
+            color: #a48409 !important;
+        }
+        
+        table td a:hover {
+            color: #ddd;
         }
     </style>
 </head>
 
-<body>
-    <dmt>Server Migration - Instructions</dmt><br>
+<body class="body">
     <div class="wrap">
-        <div class="wrap_innner">
-            <div class="wrap_innner2">
-                <ol>
+        <h1>Live Builder(Server) - <span>Issues/Requests</span></h1>
+        <!-- <div class="doc">
+            <a href="https://githubbyad.github.io/Live-Builder/" target="_blank">Editor Mode - Documentation</a>
+            <a href="https://githubbyad.github.io/Live-Builder/styles.html" target="_blank" style="background-color: #800080;">Style Mode Documentation</a>
+        </div> -->
+        <div class="luo"><span class="luspan">Last Modified on
+            <lut>
+                <script>
+                    updatedTime();
+                </script>
+            </lut></span></div>
+        <table cellspacing="0">
+            <tr class="head">
+                <td>No.</td>
+                <td>Issue/Request</td>
+                <td>Updated</td>
+                <td>Status</td>
+                <td>Comments</td>
 
-                    <li>
-                        <h3>Login link:<br>Make sure to change website URL in place of "SITENAME.COM"</h3>
-                        <textarea spellcheck="false" readonly>https://bulletlink.one/loginstaff.asp?site=SITENAME.com
-SITENAME.COM/admin
-SITENAME.COM/login
-SITENAME.COM/login.asp
-SITENAME.COM/sign
-SITENAME.COM/signin</textarea>
-                    </li>
-                    <li>
-                        <h3>Replace
-                            <cd>{{PutCharset}}</cd> with below link:
-                            <h3>
-                                <textarea spellcheck="false" readonly>
-<meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Expires" content="0" /></textarea>
-                    </li>
-                    <li>
-                        <h3>Remove below link:</h3>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>
+                    <stf-adnan>Adnan</stf-adnan>Logout link is going to "/error.asp" page.</td>
+                <td class="tdd" data-month="04">20</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Fixed. After finalizing testing, it will transfer to the proper home page automatically</td>
 
-                        <textarea spellcheck="false" readonly><script type="text/javascript" language="javascript" src="{{PutHName}}{{PutTFolder}}.js?v=9.000009"></script></textarea>
-                    </li>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Height issue while opening Forms, Classified, etc.</td>
+                <td class="tdd" data-month="04">28</td>
+                <td class="f">FIXED</td>
+                <td>Fixed by applying "iframeResizer" JS</td>
 
-                    <li>
-                        <h3>Replace
-                            <cd>{{PutHName}}</cd> with
-                            <cd>{{PutDomain}}</cd>, please remove slash
-                            <cd>/</cd> after
-                            <cd>{{PutDomain}}</cd>
-                        </h3>
-                    </li>
-                    <li>
-                        <h3> Replace
-                            <cd>/</cd> with
-                            <cd>/lib/</cd> only under header command files </h3>
-                    </li>
-                    <li>
-                        <h3> Add below link just below the
-                            <fd>custom.css</fd> in Free Layout.
-                        </h3>
+            </tr>
 
-                        <textarea spellcheck="false" readonly>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}lib/iframeResizer.min.js"></script></textarea>
-                    </li>
 
-                    <li>
-                        <h3>Add below link below the
-                            <fd>hostmane.js</fd> in Free Layout.
-                        </h3>
-                        <textarea spellcheck="false" readonly>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}settings.js?v=9.000009"></script>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}articles.js?v=9.000009"></script>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}ads.js?v=9.000009"></script>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}menus.js?v=9.000009"></script>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}sections.js?v=9.000009"></script>
-<script type="text/javascript" language="javascript" src="{{PutDomain}}polls.js?v=9.000009"></script></textarea>
-                    </li>
+            <tr>
+                <td>3</td>
+                <td>
+                    <stf-noman>Noman</stf-noman>Deleted menu from Live builder. But it is still showing in Menus icon in Site Manager. Example ( TestMenu1, TestMenu2, TestMenu3)</td>
 
-                    <li>
-                        <h3>Update index and review the view-source: make sure all the links are working.</h3>
-                    </li>
-                    <li>
-                        <h3>Now, Create new user and submit Article, Ad, Menu, Poll, etc. for changes to take effect. </h3>
-                    </li>
-                    <li>
-                        <h3>Add below 2 links in
-                            <ff>Default Layout</ff>'s Form area</h3>
+                <td class="tdd" data-month="04">20</td>
+                <td class="p">PENDING</td>
+                <td>Sir, please look into this.</td>
+            </tr>
+            <td>4</td>
 
-                        <textarea spellcheck="false" readonly>
-<link type="text/css" rel="stylesheet" href="{{PutDomain}}custom.css?v=9.000009">
-<script src="{{PutAppServer}}iframe-resizer-master/js/iframeResizer.contentWindow.js"></script></textarea>
-                    </li>
-                    <li>
-                        <h3>Full Link is required for images. Make sure to add
-                            <cd>{{MakeFullLinks:Yes}}</cd> command all layouts. If command will not work, then contact Adnan as it will also create JS errors in hostname.js</h3>
-                    </li>
-                    <li>
-                        <h3>Visit Login page and check for "new member" and "forgot password" links. Both link should have following URLs. Just look for "href" and remove "target" attribute if added previously.<br>Make sure to change website URL in place
-                            of "SITENAME.COM"</h3>
-                        <textarea spellcheck="false" readonly>new member: 
-<a href="/target_form2.asp?twindow=Form&smenu=106&pform={{NewMember}}&mad=No&sname=target_form2.asp&site=SITENAME.COM" style="color:#990000;">new member</a>
+            <td>
 
-forgot password?: 
-<a href="/target_form2.asp?twindow=Form&smenu=106&pform={{ForgotPassword}}&mad=No&sname=target_form2.asp&site=SITENAME.COM" style="color:#990000;">forgot password?</a></textarea>
-                    </li>
-                    <li>
-                        <h3>"mainbody" class should be added Just after "blbodymain" DIV. See below: <br>
-                            <img src="https://raw.githubusercontent.com/githubbyad/Files/main/tdst.png">
-                        </h3> <br>
-                    </li>
-                    <li>
-                        <h3>Place below JS code in
-                            <ff>SM Fields (JS file)</ff> field under
-                            <ff>Settings-Staff</ff>. If old code was there, then remove that code first.<br>
-                            <a class="button" href="https://raw.githubusercontent.com/githubbyad/Files/main/ufields.js" target="_blank">SM Fields (JS file)</a><br><br> Place below CSS code in "SM Fields (CSS file)" field under "Settings-Staff". If old
-                            code was there, then remove that code first.<br>
-                            <a class="button" href="https://raw.githubusercontent.com/githubbyad/Files/main/ufields.css" target="_blank">SM Fields (CSS file)</a>
-                        </h3> <br>
-                    </li>
-                    <li>
-                        <h3>We have demo sites having top links such as Contact Us", "Login", etc. We will now have new link for these Forms. Set below URL as for link.<br>
-                            <textarea spellcheck="false" readonly>https://SITENAME.COM/index0.htm?twindow=Form&smenu=115&pform=FORMNAME&mad=No&sname=target_form2.asp&site=SITENAME.COM&as=https://bulletlink.one</textarea> <br><br>
-                            <txt>Where, SITENAME.COM is the website URL and FORMNAME is the form name such as "ContactUs", {{Login}}</txt>
-                        </h3> <br>
-                    </li>
-                    <li>
-                        <h3>Move links from
-                            <cd>target_form.asp</cd> to
-                            <cd>target_form2.asp</cd>
-                        </h3>
-                    </li>
+                <stf-noman>Noman</stf-noman>Comments form below article showing Not found. it comes there using "ResizeIframe3" js in custom.js. </td>
 
-                    <li>
-                        <h3>We have set JS and CSS to restrict folder sites earlier. However, we will not face such issue on new server.<br>So we will remove these changes. Follow the below steps:
-                            <Br> <br>- Remove below CSS from custom.css<br> <textarea spellcheck="false" readonly style="height: 27px !important;">.blbodymain {visibility: hidden;}</textarea>
-                            <br><br>- Remove below JS from custom.js<br>
-                            <textarea spellcheck="false" readonly>// BEGIN: Restrict Demo Domain
+            <td class="tdd" data-month="04">28</td>
 
-$(document).ready(function () {
-var url2 = location.href.split('/');
-var lurl2 = url2[url2.length - 2];
-if (lurl2.indexOf('.') === - 1) {
-if ($(location).attr('hostname') != 'bulletlink.com') {
-window.open('/', '_top');
-}
-else {
-$('.blbodymain').css('visibility', 'visible');
-}
-}
-else {
-$('.blbodymain').css('visibility', 'visible');
-}
-});
+            <td class="f">FIXED</td>
 
-// END: Restrict Demo Domain</textarea>
-                        </h3> <br>
-                    </li>
+            <td>
+                <stf-adnan>adnan</stf-adnan>Removed IFRAME and replaced it with button.</td>
 
-                </ol>
-            </div>
-        </div>
+            </tr>
+            <td>5</td>
+
+            <td>
+                <stf-usman>Usman</stf-usman>I have added one different language article and see it's showing up fine on the site but "?????" showing under the "Live Builder". Same issue for the other language.<br> Screenshots:
+
+                <br> <a href="https://i.snipboard.io/VqFTd2.jpg" target="_blank">https://i.snipboard.io/VqFTd2.jpg</a>
+
+                <br> <a href="https://i.snipboard.io/pyugC8.jpg" target="_blank">https://i.snipboard.io/pyugC8.jpg</a>
+            </td>
+
+            <td class="tdd" data-month="04">20</td>
+
+            <td class="f">FIXED</td>
+
+            <td>
+                <stf-salim>Salim</stf-salim>Added UTF-8 language charset in Layout head part.</td>
+
+            </tr>
+            <td>6</td>
+
+            <td>
+
+                <stf-usman>Usman</stf-usman>I have added two new ads under "AdGroup13" and select "Ad Type = DifferentSpotOnClick" and see it's not working. We need to resubmit one ad to fix the issue. It's working only on the home page, under submenu pages it's
+                not working.</td>
+
+            <td class="tdd" data-month="04">20</td>
+
+            <td class="p">PENDING</td>
+
+            <td>
+                <stf-salim>Salim</stf-salim>I added from Site Manager and had no issue. Try again and review the following file after submission:<br> http://redappy.news/AdGroup13.htm
+
+                <br> http://redappy.news/ads.js
+            </td>
+
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>
+                    <stf-noman>Noman</stf-noman> I have uploaded image under "Picture" field for both Menu/submenu, it shows broken image due to image path issue.<br>Screenshot:
+                    <br> <a href="https://i.snipboard.io/nh1suI.jpg" target="_blank">https://i.snipboard.io/nh1suI.jpg</a></td>
+
+                <td class="tdd" data-month="04">22</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Fixed</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>
+                    <stf-noman>Noman</stf-noman>Added "icon_business1.gif" in "Icon File" field in "NOMAN - Test submenu2". it is not showing up.</td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>I have removed this field from the form. We have other option such as uploading image.</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>
+                    <stf-noman>Noman</stf-noman>I have added background color, Text Color, Rule Color (between Menus). It is not showing on website. I think it is due to many css added as "important" in custom.css.</td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="p">PENDING</td>
+                <td>
+                    <stf-adnan>Adnan</stf-adnan>Sir needs to add "!important" in styles added from menu/submenu screen.<br>
+                    <stf-salim>Salim</stf-salim>Juned: will this be fixed with bootstrap?
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>
+                    <stf-noman>Noman</stf-noman>"Sub Menu Bullet" field is not working in "Test submenu2" submenu under "NOMAN" menu.</td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>I have removed this field from the form. We have other option such as uploading image.</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>
+                    <stf-zaid>Zaid</stf-zaid>We need to change page not found error. For example, if some one visit the deleted article link, error need to say the "Article you are trying to view is deleted or removed by a admin".
+                </td>
+
+                <td class="tdd" data-month="04">20</td>
+                <td class="p">PENDING</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Ok, we will do.</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>
+                    <stf-zaid>Zaid</stf-zaid>Changing menu name are not getting updated on inner page. Try to change menu name on homepage and then visit below page.<br>
+                    <a href="https://redappy.news/ovs-test-bulletlink-article-p296-161.htm" target="_blank">https://redappy.news/ovs-test-bulletlink-article-p296-161.htm</a>
+                </td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="p">PENDING</td>
+                <td>
+                    It is "V" value issue, it remains same on inner page and showing old file. "V" value should be same on all pages.</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>
+                    <stf-zaid>Zaid</stf-zaid>After automatic logout due to long duration is going on "HTTP Error 404.0 - Not Found" page.
+                </td>
+
+                <td class="tdd" data-month="04">23</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>salim</stf-salim>Fixed</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>
+                    <stf-owais>Owais</stf-owais>Poll with 'MultipleChoice-CheckBox' type showing error. Selected checkbox for poll and clicked on 'Vote' button shows error in popup instead Vote Result. <br>
+                    <a href="https://i.snipboard.io/WbQML1.jpg" target="_blank">https://i.snipboard.io/WbQML1.jpg</a>
+                </td>
+
+                <td class="tdd" data-month="04">22</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>salim</stf-salim>Fixed</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>
+                    <stf-owais>Owais</stf-owais>Added record under 'Directory' icon successfully from the site manager. Refreshed site and reviewed 'SERVICES - Directory' and see until 2 pages each listing shows fine but the last page causing issue, looks like a
+                    path issue. It shows like below:<br>
+                    <a href="https://i.snipboard.io/Y7Ijn4.jpg" target="_blank">https://i.snipboard.io/Y7Ijn4.jpg</a>
+                </td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="p">PENDING</td>
+                <td>
+                    Check path in Directory Layouts</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>
+                    <stf-owais>Owais</stf-owais>Submitted details via 'Subscribe Today' from the site manager with 'Please Bill me' option. Details showing in 'Emails' icon fine. But Provided order link under email redirects to the page having text as 'Page Not
+                    Found'.
+                    <br>
+                    <a href="https://i.snipboard.io/g0klzf.jpg" target="_blank">https://i.snipboard.io/g0klzf.jpg</a><br>
+                    <a href="https://i.snipboard.io/E51Djz.jpg" target="_blank">https://i.snipboard.io/E51Djz.jpg</a>
+                </td>
+
+                <td class="tdd" data-month="04">29</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>salim</stf-salim>Fixed</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>
+                    <stf-owais>Owais</stf-owais>Created submenu as restrict type and added article in that via site manager.<br> A) Clicking on 'View' in front of article OR visited submenu page and clicking on that article 'Read More' from website, both redirects
+                    below for restricted article:<br>
+                    <a href="https://i.snipboard.io/x3tvS8.jpg" target="_blank">https://i.snipboard.io/x3tvS8.jpg</a> <br> B) Via 'Live Builder', clicked on the submenu(OVSS- Ovs SubMenu) 'view' and hover on the 1st article and clicked on 'view' redirects
+                    to the page below for restricted article.<br>
+                    <a href="https://i.snipboard.io/VeGXC4.jpg" target="_blank">https://i.snipboard.io/VeGXC4.jpg</a>
+                </td>
+
+                <td class="tdd" data-month="05">1</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-adnan>Adnan</stf-adnan>Updated "OpenLoginPopup" function in "bl.js" and currently I hardcoded one app server as per discussion with Sir. <br></td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Under PageDesigner, image icon for uploading image is not working.
+                </td>
+
+                <td class="tdd" data-month="04">21</td>
+                <td class="p">PENDING</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Looks like we have path and sending file issue on new servers. We may need to work together later after IFRAME and payments forms issues are resolved.</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>
+                    <stf-juned>Juned</stf-juned>I have added one product and see that its working fine but when we click on "By Now" its say page not found.
+                </td>
+
+                <td class="tdd" data-month="04">22</td>
+                <td class="p">PENDING</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>It is working but Adnan will put the final code at the end since there is JS code involved that he already have working in other site.</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>
+                    <stf-juned>Juned</stf-juned>Blank image path is not working.<br>
+                    <a href="https://redappy.news/images/blank.png" target="_blank">https://redappy.news/images/blank.png</a>
+                </td>
+
+                <td class="tdd" data-month="04">22</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>Salim</stf-salim>Fixed. Updated image path is <br>
+                    <a href="https://redappy.news/blank.png" target="_blank">https://redappy.news/blank.png</a></td>
+            </tr>
+            <tr>
+                <td>21</td>
+                <td>
+                    <stf-adnan>Adnan</stf-adnan>Buttons are not showing when we mouseover "AdGroup13" which is set as "DifferentSpotTime".<br>
+                    <a href="https://i.snipboard.io/nBES54.jpg" target="_blank">https://i.snipboard.io/nBES54.jpg</a>
+                </td>
+
+                <td class="tdd" data-month="05">1</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-adnan>adnan</stf-adnan>Fixed by placing JS for "DifferentSpotTime"</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>
+                    <stf-zaid>Zaid</stf-zaid>Website Title ,Meta Keywords, Meta Description are not working on form sub-menu level.
+                </td>
+
+                <td class="tdd" data-month="04">25</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>salim</stf-salim>Fixed</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>
+                    <stf-zaid>Zaid</stf-zaid>After setting sub-menu=no, we can still review article URL and submenu URL.<br>
+                    <a href="https://redappy.news/deadly-boston-fire-p170-102.htm" target="_blank">https://redappy.news/deadly-boston-fire-p170-102.htm</a><br>
+                    <a href="https://redappy.news/index102.htm" target="_blank">https://redappy.news/index102.htm</a>
+                </td>
+
+                <td class="tdd" data-month="04">25</td>
+                <td class="p">PENDING</td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>
+                    <stf-adnan>adnan</stf-adnan>Properties are opening in new tab instead of same tab. As it is opening in new tab, it shows "bulletlink.one" as domain which client may don't like it.<br>
+                    <a href="https://redappy.news/index0.htm?twindow=Property&smenu=125&mad=No&sname=target_property.asp&site=redappy.news&as=https://bulletlink.one" target="_blank">View Property List</a>
+                </td>
+
+                <td class="tdd" data-month="04">29</td>
+                <td class="f">FIXED</td>
+                <td>
+                    <stf-salim>salim</stf-salim>
+                </td>
+            </tr>
+        </table>
     </div>
+    <span class="date" style="display:none"></span><br>
+    <span class="month" style="display:none"></span>
 
-    <div class="sticky">To Add or Modify steps, please contact <a title="Send Email" href="mailto:adnanisab7@gmail.com?subject=Server Migration - Instrcutions">Adnan</a></div>
+
+    <br><br><br><br><br><br><br><br><br>
+
 </body>
 
 </html>
